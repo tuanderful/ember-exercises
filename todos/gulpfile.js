@@ -58,6 +58,6 @@ gulp.task('default', function() {
   // place code for your default task here
   startExpress();
   startLivereload();
-  gulp.watch('**/*', notifyLivereload);
+  gulp.watch('src/**/*', notifyLivereload);
   console.log('gulp and running');
 });
