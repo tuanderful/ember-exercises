@@ -1312,7 +1312,11 @@ Ember.onLoad('Ember.Application', function(Application) {
 /**
   Date.parse with progressive enhancement for ISO 8601 <https://github.com/csnover/js-iso8601>
 
+<<<<<<< HEAD
   Ã‚Â© 2011 Colin Snover <http://zetafleet.com>
+=======
+  Â© 2011 Colin Snover <http://zetafleet.com>
+>>>>>>> FETCH_HEAD
 
   Released under MIT license.
 
@@ -1331,12 +1335,21 @@ var origParse = Date.parse, numericKeys = [ 1, 4, 5, 6, 7, 10, 11 ];
 Ember.Date.parse = function (date) {
     var timestamp, struct, minutesOffset = 0;
 
+<<<<<<< HEAD
     // ES5 Ã‚Â§15.9.4.2 states that the string should attempt to be parsed as a Date Time String Format string
     // before falling back to any implementation-specific date parsing, so thatÃ¢â‚¬â„¢s what we do, even if native
     // implementations could be faster
     //              1 YYYY                2 MM       3 DD           4 HH    5 mm       6 ss        7 msec        8 Z 9 Ã‚Â±    10 tzHH    11 tzmm
     if ((struct = /^(\d{4}|[+\-]\d{6})(?:-(\d{2})(?:-(\d{2}))?)?(?:T(\d{2}):(\d{2})(?::(\d{2})(?:\.(\d{3}))?)?(?:(Z)|([+\-])(\d{2})(?::(\d{2}))?)?)?$/.exec(date))) {
         // avoid NaN timestamps caused by Ã¢â‚¬Å“undefinedÃ¢â‚¬Â values being passed to Date.UTC
+=======
+    // ES5 Â§15.9.4.2 states that the string should attempt to be parsed as a Date Time String Format string
+    // before falling back to any implementation-specific date parsing, so thatâ€™s what we do, even if native
+    // implementations could be faster
+    //              1 YYYY                2 MM       3 DD           4 HH    5 mm       6 ss        7 msec        8 Z 9 Â±    10 tzHH    11 tzmm
+    if ((struct = /^(\d{4}|[+\-]\d{6})(?:-(\d{2})(?:-(\d{2}))?)?(?:T(\d{2}):(\d{2})(?::(\d{2})(?:\.(\d{3}))?)?(?:(Z)|([+\-])(\d{2})(?::(\d{2}))?)?)?$/.exec(date))) {
+        // avoid NaN timestamps caused by â€œundefinedâ€ values being passed to Date.UTC
+>>>>>>> FETCH_HEAD
         for (var i = 0, k; (k = numericKeys[i]); ++i) {
             struct[k] = +struct[k] || 0;
         }
@@ -10545,4 +10558,8 @@ Ember.onLoad('Ember.Application', function(Application) {
 })();
 
 
+<<<<<<< HEAD
 })();
+=======
+})();
+>>>>>>> FETCH_HEAD
