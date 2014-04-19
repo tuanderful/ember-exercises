@@ -43,3 +43,31 @@ Todos.Todo.FIXTURES = [
    isCompleted: false
  }
 ];
+
+// -- Controller --------------------------------------------------------------
+Todos.TodosController = Ember.ArrayController.extend({
+  remaining: function() {
+    return this.filterBy('isCompleted', false).get('length');
+  }.property('@each.isCompleted'),
+  inflection: function() {
+    return this.get('remaining') === 1 ? 'todo' : 'todos';
+  }.property('remaining')
+});
+
+
+
+
+/*Todos.TodoController = Ember.ObjectController.extend({
+  isCompleted: function(key, value){
+    var model = this.get('model');
+
+    // Only key is passed
+    if (value === undefined) {
+      return model.get('isCompleted');
+    } else {
+      model.set('isCompleted', value);
+      model.save();
+      return value;
+    }
+  }.property('model.isCompleted')
+});*/
