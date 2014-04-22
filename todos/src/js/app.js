@@ -46,6 +46,33 @@ Todos.Todo.FIXTURES = [
 
 // -- Controller --------------------------------------------------------------
 Todos.TodosController = Ember.ArrayController.extend({
+  actions: {
+    clearCompleted: function() {
+      var completed = this.filterBy('isCompleted', true);
+      completed.invoke('deleteRecord');
+      completed.invoke('save');
+    },
+    createTodo: function() {
+      var title = this.get('newTitle');
+      if (!title.trim()) { return; }
+
+      var todo = this.store.createRecord('todo', {
+        title: title,
+        isCompleted: false
+      });
+
+      // Clear the field
+      this.set('newTitle', '');
+
+      todo.save();
+    }
+  },
+  hasCompleted: function() {
+    return this.get('completed') > 0;
+  }.property('completed'),
+  completed: function() {
+    return this.filterBy('isCompleted', true).get('length');
+  }.property('@each.isCompleted'),
   remaining: function() {
     return this.filterBy('isCompleted', false).get('length');
   }.property('@each.isCompleted'),
@@ -54,11 +81,15 @@ Todos.TodosController = Ember.ArrayController.extend({
   }.property('remaining')
 });
 
-
-
-
-/*Todos.TodoController = Ember.ObjectController.extend({
-  isCompleted: function(key, value){
+Todos.TodoController = Ember.ObjectController.extend({
+  actions: {
+    removeTodo: function () {
+      var todo = this.get('model');
+      todo.deleteRecord();
+      todo.save();
+    }
+  }//,
+  /*isCompleted: function(key, value){
     var model = this.get('model');
 
     // Only key is passed
@@ -69,5 +100,5 @@ Todos.TodosController = Ember.ArrayController.extend({
       model.save();
       return value;
     }
-  }.property('model.isCompleted')
-});*/
+  }.property('model.isCompleted')*/
+});
